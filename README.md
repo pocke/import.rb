@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/import.rb.svg)](https://badge.fury.io/rb/import.rb)
+
 # import.rb
 
 Instead of `Kernel.require`.
