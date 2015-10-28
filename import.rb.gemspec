@@ -1,17 +1,18 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require_relative 'lib/import'
+require 'import'
 
 Gem::Specification.new do |spec|
   spec.name          = "import.rb"
-  spec.version       = import('./lib/version')::VERSION
+  spec.version       = Kernel.import('./lib/version')::VERSION
   spec.authors       = ["Masataka Kuwabara"]
   spec.email         = ["p.ck.t22@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Instead of require method"
+  spec.description   = "Instead of require method"
+  spec.homepage      = "https://github.com/pocke/import.rb"
+  spec.license       = 'CC0-1.0'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
