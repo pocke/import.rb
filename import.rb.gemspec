@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Masataka Kuwabara"]
   spec.email         = ["p.ck.t22@gmail.com"]
 
-  spec.summary       = "Instead of require method"
-  spec.description   = "Instead of require method"
+  spec.summary       = "Instead of Kernel.require"
+  spec.description   = File.read('./README.md')
   spec.homepage      = "https://github.com/pocke/import.rb"
   spec.license       = 'CC0-1.0'
 

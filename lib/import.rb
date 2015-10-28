@@ -18,10 +18,8 @@ exist_file = -> (path, fname = nil) {
 }
 
 # @param [String] feature
-# @return [Pathname|nil]
+# @return [String|nil]
 find_file = -> (feature) {
-  # TODO: relative path
-
   # absolute path
   if feature[0] == '/'
     full_path = exist_file.(feature)

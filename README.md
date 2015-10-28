@@ -1,15 +1,14 @@
-# Import::Rb
+# import.rb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/import/rb`. To experiment with that code, run `bin/console` for an interactive prompt.
+Instead of `Kernel.require`.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'import-rb'
+gem 'import.rb'
 ```
 
 And then execute:
@@ -18,11 +17,29 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install import-rb
+    $ gem install import.rb
 
 ## Usage
 
-TODO: Write usage instructions here
+- cat.rb
+
+```ruby
+class Cat
+  def meow
+    puts 'meow meow'
+  end
+end
+```
+
+- main.rb
+
+```ruby
+require 'import'
+cat = import('./cat')::Cat
+cat.new.meow # => meow meow
+
+# Cat  # => uninitialized constant Cat (NameError)
+```
 
 ## Development
 
@@ -32,5 +49,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/import-rb.
+Bug reports and pull requests are welcome on GitHub at https://github.com/pocke/import.rb .
 
