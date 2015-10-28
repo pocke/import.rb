@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["p.ck.t22@gmail.com"]
 
   spec.summary       = "Instead of Kernel.require"
-  spec.description   = File.read('./README.md')
+  spec.description   = "Instead of Kernel.require"
   spec.homepage      = "https://github.com/pocke/import.rb"
   spec.license       = 'CC0-1.0'
 
