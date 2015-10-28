@@ -22,8 +22,16 @@ exist_file = -> (path, fname = nil) {
 find_file = -> (feature) {
   # TODO: relative path
 
+  # absolute path
   if feature[0] == '/'
     full_path = exist_file.(feature)
+    return full_path if full_path
+  end
+
+  # relative path
+  if feature.start_with?('./') || feature.start_with?('../')
+    base = caller_locations[2].absolute_path
+    full_path = exist_file.(File.expand_path("../#{feature}", base))
     return full_path if full_path
   end
 
