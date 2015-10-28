@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'import/rb/version'
+require_relative 'lib/import'
 
 Gem::Specification.new do |spec|
   spec.name          = "import.rb"
-  spec.version       = Import::VERSION # TODO
+  spec.version       = import('./lib/version')::VERSION
   spec.authors       = ["Masataka Kuwabara"]
   spec.email         = ["p.ck.t22@gmail.com"]
 
