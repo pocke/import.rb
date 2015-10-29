@@ -56,4 +56,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/pocke/
 
 ## Reference
 
-- [http://pocke.hatenablog.com/entry/2015/10/28/154214:title] (Japanese Blog)
+- [require しないで Ruby を書く -- import.rb というアプローチ](http://pocke.hatenablog.com/entry/2015/10/28/154214) (Japanese Blog)
