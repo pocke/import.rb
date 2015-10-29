@@ -53,3 +53,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/pocke/import.rb .
 
+
+## Reference
+
+- [http://pocke.hatenablog.com/entry/2015/10/28/154214:title] (Japanese Blog)
