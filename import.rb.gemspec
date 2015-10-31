@@ -5,7 +5,7 @@ require 'import'
 
 Gem::Specification.new do |spec|
   spec.name          = "import.rb"
-  spec.version       = Import.import('./lib/version')::VERSION
+  spec.version       = Import::VERSION
   spec.authors       = ["Masataka Kuwabara"]
   spec.email         = ["p.ck.t22@gmail.com"]
 
@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "test-unit", "~> 3.1.5"
   spec.add_development_dependency "guard", "~> 2.13.0"
   spec.add_development_dependency "guard-test", "~> 2.0.6"
+  spec.add_development_dependency "pry", "~> 0.10.2"
 end

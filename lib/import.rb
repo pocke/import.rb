@@ -71,4 +71,6 @@ module Import
       end
     end
   end
+
+  VERSION = self.import('./import/version')::VERSION
 end
