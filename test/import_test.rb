@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'import'
+require_relative '../lib/import'
 
 class TestImport < Test::Unit::TestCase
   def test_import
@@ -16,5 +16,14 @@ class TestImport < Test::Unit::TestCase
   def test_import_recursion
     re = Import.import('./data/recursion')::Recursion
     assert{re.greeting == 'hello'}
+  end
+
+  def test_global
+    Import.global
+    assert{defined?(import) == 'method'}
+
+    s = import('./data/sample.rb')::Sample
+    assert{s.new.greeting == 'hello'}
+    assert{(defined? ::Sample).nil?}
   end
 end

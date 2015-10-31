@@ -22,7 +22,7 @@ module Import
 
     # @param [String] feature
     # @return [String|nil]
-    def find_file(feature)
+    def find_file(feature, base)
       # absolute path
       if feature[0] == '/'
         full_path = exist_file(feature)
@@ -31,7 +31,6 @@ module Import
 
       # relative path
       if feature.start_with?('./') || feature.start_with?('../')
-        base = caller_locations[1].absolute_path
         full_path = exist_file(File.expand_path("../#{feature}", base))
         return full_path if full_path
       end
@@ -55,11 +54,21 @@ module Import
       return res
     end
 
-    def import(feature)
-      path = find_file(feature)
+    # @param [String] feature
+    # @param [String] base
+    def import(feature, base = caller_locations[0].absolute_path)
+      path = find_file(feature, base)
       raise LoadError, "cannot load such file -- #{feature}" unless path
 
       return evaluate(path)
+    end
+
+    define_method(:global) do
+      module ::Kernel
+        def import(feature)
+          Import.import(feature, caller_locations[0].absolute_path)
+        end
+      end
     end
   end
 end

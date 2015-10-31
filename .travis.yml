@@ -11,8 +11,5 @@ sudo: false
 before_install:
   - 'gem install bundler'
 
-before_script:
-  - 'bundle exec rake install:local'
-
 script:
   - 'shopt -s globstar && ruby test/**/*_test.rb'
