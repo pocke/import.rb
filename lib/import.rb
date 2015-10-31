@@ -2,6 +2,25 @@ require 'pathname'
 
 module Import
   class << self
+    # @param [String] feature
+    # @param [String] base
+    def import(feature, base = caller_locations[0].absolute_path)
+      path = find_file(feature, base)
+      raise LoadError, "cannot load such file -- #{feature}" unless path
+
+      return evaluate(path)
+    end
+
+    define_method(:global) do
+      module ::Kernel
+        def import(feature)
+          Import.import(feature, caller_locations[0].absolute_path)
+        end
+      end
+    end
+
+    private
+
     # If file exists, returns full path. unless, returns nil
     # @param [String] path Base path
     # @param [String] fname file name
@@ -52,23 +71,6 @@ module Import
       res.module_eval(script, path)
 
       return res
-    end
-
-    # @param [String] feature
-    # @param [String] base
-    def import(feature, base = caller_locations[0].absolute_path)
-      path = find_file(feature, base)
-      raise LoadError, "cannot load such file -- #{feature}" unless path
-
-      return evaluate(path)
-    end
-
-    define_method(:global) do
-      module ::Kernel
-        def import(feature)
-          Import.import(feature, caller_locations[0].absolute_path)
-        end
-      end
     end
   end
 
