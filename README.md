@@ -1,4 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/import.rb.svg)](https://badge.fury.io/rb/import.rb)
+[![Build Status](https://travis-ci.org/pocke/import.rb.svg?branch=master)](https://travis-ci.org/pocke/import.rb)
 
 # import.rb
 
