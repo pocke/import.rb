@@ -37,7 +37,7 @@ end
 
 ```ruby
 require 'import'
-cat = import('./cat')::Cat
+cat = Import.import('./cat')::Cat
 cat.new.meow # => meow meow
 
 # Cat  # => uninitialized constant Cat (NameError)

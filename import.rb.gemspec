@@ -5,7 +5,7 @@ require 'import'
 
 Gem::Specification.new do |spec|
   spec.name          = "import.rb"
-  spec.version       = Kernel.import('./lib/version')::VERSION
+  spec.version       = Import.import('./lib/version')::VERSION
   spec.authors       = ["Masataka Kuwabara"]
   spec.email         = ["p.ck.t22@gmail.com"]
 
