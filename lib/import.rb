@@ -63,14 +63,42 @@ module Import
     end
 
     # @param [String] path
+    # @param [Module] namespace
     # @return [Module]
-    def evaluate(path)
+    def evaluate(path, namespace = nil)
       script = File.read(path)
 
-      res = Module.new
-      res.module_eval(script, path)
+      res = namespace || Module.new
+      with_replace_method(:require, new_require_gen(res)) do
+        res.module_eval(script, path)
+      end
 
       return res
+    end
+
+    # @param [Symbol] target
+    # @param [Proc] body
+    # @param [Proc] block
+    def with_replace_method(target, body, &block)
+      method = ::Kernel.instance_method(target)
+      ::Kernel.__send__(:define_method, target, body)
+
+      block && block.call
+    ensure
+      ::Kernel.__send__(:define_method, target, method)
+    end
+
+    # @param [Module] mod
+    def new_require_gen(mod)
+      this = self
+      return -> (feature) {
+        full_path = this.__send__(:find_file, feature, caller_locations[1].absolute_path)
+        if full_path
+          this.__send__(:evaluate, full_path, mod)
+        else
+          require feature
+        end
+      }
     end
   end
 
