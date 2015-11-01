@@ -32,7 +32,7 @@ module Import
 
       return full_path if FileTest.file?(full_path)
 
-      rb ="#{full_path}.rb"
+      rb = "#{full_path}.rb"
       return rb if FileTest.file?(rb)
 
       return nil
@@ -95,7 +95,7 @@ module Import
         if full_path
           this.__send__(:evaluate, full_path, mod)
         else
-          require feature #TODO: Does not work...
+          require feature # TODO: Does not work...
         end
       }
     end

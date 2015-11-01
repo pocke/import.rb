@@ -37,7 +37,7 @@ class TestImport < Test::Unit::TestCase
   def test_with_replace_method
     a = 1
 
-    Import.__send__(:with_replace_method, :eval, -> (i) { a+=i }) do
+    Import.__send__(:with_replace_method, :eval, -> (i) { a += i }) do
       eval(10)
     end
 
