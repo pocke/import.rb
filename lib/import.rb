@@ -68,37 +68,33 @@ module Import
       script = File.read(path)
 
       res = namespace || Module.new
-      with_replace_method(:require, new_require_gen(res)) do
+      with_replace_require(res) do
         res.module_eval(script, path)
       end
 
       return res
     end
 
-    # @param [Symbol] target
-    # @param [Proc] body
-    # @param [Proc] block
-    def with_replace_method(target, body, &block)
-      method = ::Kernel.instance_method(target)
-      ::Kernel.__send__(:define_method, target, body)
-
-      block && block.call
-    ensure
-      ::Kernel.__send__(:define_method, target, method)
-    end
-
     # @param [Module] mod
-    def new_require_gen(mod)
+    # @param [Proc] block
+    def with_replace_require(mod, &block)
+      orig = ::Kernel.instance_method(:require)
+
       this = self
-      return -> (feature) {
-        full_path = this.__send__(:find_file, feature, caller_locations[1].absolute_path)
+      ::Kernel.__send__(:define_method, :require, -> (feature) {
+        full_path = this.__send__(:find_file, feature, caller_locations[0].absolute_path)
         if full_path
           this.__send__(:evaluate, full_path, mod)
         else
-          require feature # TODO: Does not work...
+          orig.bind(nil).call(feature)
         end
-      }
+      })
+
+      block && block.call
+    ensure
+      ::Kernel.__send__(:define_method, :require, orig)
     end
+
   end
 
   VERSION = self.import('./import/version')::VERSION
