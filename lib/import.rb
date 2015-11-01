@@ -1,7 +1,7 @@
 require 'pathname'
 
 module Import
-  require 'import/namespace'
+  require_relative 'import/namespace'
 
   class << self
     # @param [String] feature
