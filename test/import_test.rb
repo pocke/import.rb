@@ -4,6 +4,7 @@ require_relative '../lib/import'
 class TestImport < Test::Unit::TestCase
   def test_import
     sample = Import.import('./data/sample')
+    assert{sample.is_a? Import::Namespace}
     assert{sample::Sample.is_a? Class}
     assert{sample::Sample.new.greeting == 'hello'}
     assert{(defined? ::Sample).nil?}

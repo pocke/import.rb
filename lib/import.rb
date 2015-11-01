@@ -1,6 +1,8 @@
 require 'pathname'
 
 module Import
+  require 'import/namespace'
+
   class << self
     # @param [String] feature
     # @param [String] base
@@ -67,7 +69,7 @@ module Import
     def evaluate(path, namespace = nil)
       script = File.read(path)
 
-      res = namespace || Module.new
+      res = namespace || Namespace.new
       with_replace_require(res) do
         res.module_eval(script, path)
       end
@@ -84,6 +86,8 @@ module Import
       ::Kernel.__send__(:define_method, :require, -> (feature) {
         full_path = this.__send__(:find_file, feature, caller_locations[0].absolute_path)
         if full_path
+          return false if mod.required?(full_path)
+          mod.required << full_path
           this.__send__(:evaluate, full_path, mod)
         else
           orig.bind(nil).call(feature)
