@@ -13,6 +13,11 @@ module Import
       return evaluate(path)
     end
 
+    # @param [String] feature
+    def import_relative(feature)
+      return import("./#{feature}", caller_locations[0].absolute_path)
+    end
+
     def global
       ::Kernel.__send__(:define_method, :import, -> (feature) {
         Import.import(feature, caller_locations[0].absolute_path)

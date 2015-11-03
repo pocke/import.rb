@@ -26,6 +26,15 @@ class TestImport < Test::Unit::TestCase
     assert{(defined? ::Foo).nil?}
   end
 
+  def test_import_relative
+    m = Import.import_relative('data/relative.rb')::Mod::Sample
+    assert{m.new.greeting == 'hello'}
+
+    assert_raise LoadError do
+      Import.import_relative 'data/bad_relative.rb'
+    end
+  end
+
   def test_global
     Import.global
     assert{defined?(import) == 'method'}
